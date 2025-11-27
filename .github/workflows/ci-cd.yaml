@@ -72,15 +72,8 @@ jobs:
         # Update deployment with the new image tag
         sed -i 's|image:.*|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|' k8s/deployment.yaml
         
-    - name: Commit Updated Manifests
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add k8s/deployment.yaml
-        git diff --staged --quiet || git commit -m "ci: Update to image ${{ github.sha }}"
-        git push
-
-  # Job 3: Deploy to Kubernetes (Manual Trigger)
+    
+  
   deploy:
     name: Deploy to Kubernetes
     needs: build-and-push
