@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: starbucks-ingress
+spec:
+  rules:
+  - host: starbucks.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: starbucks-service
+            port:
+              number: 80
